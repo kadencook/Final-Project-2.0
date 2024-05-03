@@ -5,12 +5,13 @@ module FSM (
     input logic lfsr_begin,
     output logic lfsr_reset,
     output logic rst,
-    output logic en
+    output logic en,
+    output logic [1:0] curr_state
 );
 
     typedef enum logic [1:0] {S0, S1, S2} StateType;
     StateType state, nextState;
-
+    assign curr_state = state;
     // State Register
     always_ff @(posedge clk or posedge reset) begin
         if (reset)
@@ -25,7 +26,7 @@ module FSM (
             S0: begin
                 lfsr_reset<=1;
                 rst<=1;
-                en<=0;
+                en<=1;
                 if (~start && lfsr_begin)
                     nextState<=S2;
                 else if (start)
@@ -44,8 +45,8 @@ module FSM (
             end
             S2: begin
                 lfsr_reset<=0;
-                rst<=1;
-                en<=0;
+                rst<=0;
+                en<=1;
                 if (start)
                     nextState<=S1;
                 else

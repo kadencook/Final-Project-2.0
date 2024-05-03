@@ -53,13 +53,22 @@ module top_demo
   logic [16:0] CURRENT_COUNT;
   logic [16:0] NEXT_COUNT;
   logic        smol_clk;
-   
+  
+
   // Place Conway Game of Life instantiation here
+  logic [63:0] seed;
+  logic[63:0] grid_evolve;
+  assign seed= 64'b00000101_10010010_01100100_00100100_00111001_01110100_00111100_00101000;
+  logic clk, start, reset, lfsr_begin;
+  clk_div dut1(sysclk_125mhz, sw[2], clk_en);
+  gameOfLife dut(clk_en, sw[7], sw[0], sw[1], seed, grid_evolve);
+
+  
  
   // HDMI
   // logic hdmi_out_en;
   //assign hdmi_out_en = 1'b0;
-  hdmi_top test (n2, sysclk_125mhz, hdmi_d_p, hdmi_d_n, hdmi_clk_p, 
+  hdmi_top test (grid_evolve, sysclk_125mhz, hdmi_d_p, hdmi_d_n, hdmi_clk_p, 
 		         hdmi_clk_n, hdmi_cec, hdmi_sda, hdmi_scl, hdmi_hpd);
   
   // 7-segment display
