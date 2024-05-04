@@ -4,9 +4,7 @@ module FSM (
     input logic start,
     input logic lfsr_begin,
     output logic lfsr_reset,
-    output logic rst,
-    output logic en,
-    output logic [1:0] curr_state
+    output logic en
 );
 
     typedef enum logic [1:0] {S0, S1, S2} StateType;
@@ -22,39 +20,34 @@ module FSM (
 
     // Next State Logic
     always_comb begin
-        case (state)
+        case (state) //idle
             S0: begin
                 lfsr_reset<=1;
-                rst<=1;
                 en<=1;
-                if (~start && lfsr_begin)
-                    nextState<=S2;
-                else if (start)
+                if (lfsr_begin)
                     nextState<=S1;
+                else if(start)
+                    nextState<=S2;
                 else
                     nextState<=S0;
             end
-            S1: begin
+            S1: begin //lfsr
                 lfsr_reset<=0;
-                rst<=0;
                 en<=1;
-                if (lfsr_begin)
+                if (~lfsr_begin)
+                    nextState<=S0;
+                else if(start)
                     nextState<=S2;
-                else
-                    nextState<=S1;
+                else nextState<=S1;
             end
-            S2: begin
-                lfsr_reset<=0;
-                rst<=0;
-                en<=1;
-                if (start)
-                    nextState<=S1;
-                else
-                    nextState<=S2;
+            S2: begin //play 
+                en<=0;
+                if(~start)
+                    nextState<=S0;
+                else nextState<=S2;
             end
             default: begin
                 lfsr_reset<=1;
-                rst<=1;
                 en<=0;
                 nextState<=S0;
             end

@@ -70,12 +70,6 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
-set_param chipscope.maxJobs 4
-set_param synth.incrementalSynthesisCache C:/Users/kadcook/Desktop/.Xil/Vivado-24124-CEAT-ENDV350-08/incrSyn
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z020clg484-1
 
@@ -96,14 +90,15 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/audio_sample_packet.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/auxiliary_video_information_info_frame.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/clk_div.sv
-  C:/Users/kadcook/Desktop/Final-Project-2.0/SV/datapath.sv
+  C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/datapath.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/vivado/digit2segments.sv
-  C:/Users/kadcook/Desktop/Final-Project-2.0/SV/flopenr.sv
+  C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/flopenr.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/fsm.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/gameOfLife.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/hdmi.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/hdmi_top.sv
-  C:/Users/kadcook/Desktop/Final-Project-2.0/SV/lfsr.sv
+  C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/lfsr.sv
+  C:/Users/kadcook/Desktop/Final-Project-2.0/OurSV/mux.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/packet_assembler.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/packet_picker.sv
   C:/Users/kadcook/Desktop/Final-Project-2.0/Vivado/Project/Project.srcs/sources_1/imports/dldfall22proj/ProjectHDMI/hdmi_working/pll.sv

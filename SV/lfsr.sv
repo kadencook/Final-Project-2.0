@@ -1,4 +1,4 @@
-module lfsr(seed, clk, reset, shift_seed);
+module lfsr64(seed, clk, reset, shift_seed);
 //inputs and outputs for a smaller implementation
 //perhaps 8 or 16 bits
 
