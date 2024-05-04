@@ -7,15 +7,11 @@ module gameOfLife (input logic clk, reset, start, lfsr_begin, input logic [63:0]
 
     lfsr64 dut3 (seed, clk, lfsr_reset, lfsr_out);
 
-    mux2 dut5 ();
+    mux2 dut5 (grid_evolve);
 
     datapath dut( grid, grid_evolve );
 
     flopenr #(64)dut2 (clk, rst, en, grid_evolve, lfsr_out, grid);
-   // lfsr64 dut3 (seed, clk, lfsr_reset, lfsr_out);
-   // flopenr #(64)dut2 (clk, rst, en, grid_evolve, lfsr_out, grid);
-    //datapath dut( grid, grid_evolve );
-    // FSM dut4 (clk, reset, start, lfsr_begin, lfsr_reset, rst, en, curr_state);
 
     
 
